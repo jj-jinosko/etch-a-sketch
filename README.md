@@ -8,6 +8,7 @@ Odin etch-a-sketch is a website that will display blocks that change color when 
 > - basic HTML
 > - basic CSS
 > - flexbox
+> - basic JavaScript
 
 # TODO:
 - Create a webpage with a 16x16 grid of square divs
