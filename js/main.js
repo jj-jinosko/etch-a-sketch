@@ -7,46 +7,50 @@ sketchPadContainer.style.height = '480px';
 sketchPadContainer.style.border = '1px solid black'
 sketchPadContainer.style.display = 'flex';
 
-// sketchPadContainer.style.margin = '0 auto';
-// sketchPadContainer.style.padding = '8px';
+let sketchPadSize = 480;
 
+let cellsPerSide = 10;
+//----------- reset grid --------------------
+function resetGrid(){
+    let userCells;
+    let getUserCells = function () { 
+        userCells = prompt('how many cells per side?')
+        };
+    let userCellsBtn = document.querySelector('#cells');
+    userCellsBtn.addEventListener('click', getUserCells());
 
-let containerSize = 480;
-let boxesInRow = 3;
-let boxesInColumn = 3;
-// let boxMinWidth = (boxSize / boxesInRow) * (10.00/10.00);
-// console.log(minBoxWidth);
+    cellsPerSide = userCells;
+    return cellsPerSide;
+}
 
-//---------create # boxes in Row
-let newRowBox;
-let newColumnBox;
+//---------create # Cells in Row
+let newRowCell;
+let newColumnCell;
+let cellMinWidth = (sketchPadSize/cellsPerSide) + 'px'
 
-for (let i = 0; i < boxesInRow; i++){
-    newRowBox = document.createElement('div');
-    newRowBox.style.display = 'flex';
-    newRowBox.style.minWidth = '160px';
+for (let i = 0; i < cellsPerSide; i++){
+    newRowCell = document.createElement('div');
+    newRowCell.style.display = 'flex';
+    newRowCell.style.minWidth = cellMinWidth //'160px';
 
-    newRowBox.style.flexDirection = 'column';
-    newRowBox.style.border = '1px solid black';
-    newRowBox.style.flex
-    sketchPadContainer.appendChild(newRowBox);
+    newRowCell.style.flexDirection = 'column';
+    sketchPadContainer.appendChild(newRowCell);
 
-    for (let j = 0; j < boxesInColumn; j++){
-        newColumnBox = document.createElement('div');
-        newColumnBox.classList.add('cell');
-        newColumnBox.style.flexGrow = 1;
-        newColumnBox.style.border = '1px solid black';
-        
-        newRowBox.appendChild(newColumnBox);
+    for (let j = 0; j < cellsPerSide; j++){
+        newColumnCell = document.createElement('div');
+        newColumnCell.classList.add('cell');
+        newColumnCell.style.border = '1px solid black'
+        newColumnCell.style.flexGrow = 1;      
+        newRowCell.appendChild(newColumnCell);
     }
 }
 
 let cells = document.querySelectorAll('.cell');
 function clickEvent() {
     console.log('clicked');
-    this.style.backgroundColor='black';
+    this.style.backgroundColor = 'black';
 }
 
-cells.forEach(cell => cell.addEventListener('click', clickEvent));
+cells.forEach(cell => cell.addEventListener('mouseenter', clickEvent));
 
 
