@@ -10,6 +10,9 @@ sketchPadContainer.style.display = 'flex';
 let sketchPadSize = 480;
 let cellsPerSideDEFAULT = 20;
 
+
+let cells;
+
 //--------- create Grid ------------------
 let createGrid = function (cellsPerSide){
     let newRowCell;
@@ -37,23 +40,7 @@ let createGrid = function (cellsPerSide){
 }
 
 createGrid(cellsPerSideDEFAULT);
-
-//------------ highlight grid ----------------------
-let cells = document.querySelectorAll('.cell');
-function clickEvent() {
-    console.log('clicked');
-    this.style.backgroundColor = 'rgb(143, 196, 156)';
-}
-
-cells.forEach(cell => cell.addEventListener('mouseenter', clickEvent));
-
-//----------- reset grid --------------------
-let cellRows = document.querySelectorAll('.row')
-function resetGrid(){
-    cells.forEach(cell => {cell.remove()});
-    cellRows.forEach(row => {row.remove()});
-
-}
+highlightGrid();
 
 //----------- set Grid Size --------------------
 let userCellsBtn = document.querySelector('#cells');
@@ -66,7 +53,26 @@ function setGridSize(){
     
     userCellsBtn.addEventListener('click', resetGrid());
     userCellsBtn.addEventListener('click', createGrid(userCells));
+    highlightGrid();
 }
 
 userCellsBtn.addEventListener('click', setGridSize);
 
+//----------- reset grid --------------------
+let cellRows = document.querySelectorAll('.row')
+function resetGrid(){
+    cells.forEach(cell => {cell.remove()});
+    cellRows.forEach(row => {row.remove()});
+
+}
+
+//------------ highlight grid ----------------------
+function highlightGrid(){
+    cells = document.querySelectorAll('.cell');
+    function clickEvent() {
+        console.log('clicked');
+        this.style.backgroundColor = 'rgb(143, 196, 156)';
+    }
+
+    cells.forEach(cell => cell.addEventListener('mouseenter', clickEvent));
+}
